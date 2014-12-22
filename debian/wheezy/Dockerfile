@@ -10,7 +10,7 @@ RUN \
   apt-get install --no-install-recommends -y sudo openssh-server \
     build-essential libwww-perl git-core htop mc vim tree libmagickwand-dev \
     imagemagick libmagickcore-dev chkconfig sudo libxslt1-dev libxml2-dev \
-    git wget libfreetype6 libfontconfig bzip2 \
+    git wget libfreetype6 libfontconfig bzip2 dnsutils \
     wget libtool libyaml-dev curl mc && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
