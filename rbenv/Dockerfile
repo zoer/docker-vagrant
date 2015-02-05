@@ -7,7 +7,7 @@ RUN \
   apt-get install -y build-essential libyaml-dev libxml2-dev libxslt-dev \
     build-essential git-core curl libssl-dev readline-common autoconf curl \
     zlib1g zlib1g-dev libmysqlclient-dev libcurl4-openssl-dev libxslt1-dev \
-    libxml2-dev wget libtool && \
+    libxml2-dev wget libtool libffi-dev && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
@@ -21,15 +21,23 @@ RUN \
 RUN \
   PREFIX=/home/vagrant/bin /home/vagrant/.rbenv/plugins/ruby-build/install.sh
 ENV PATH="/home/vagrant/.rbenv/bin:/home/vagrant/.rbenv/shims:$PATH"
-RUN echo 'PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH' >> $HOME/.profile
-RUN echo 'eval "$(rbenv init -)"' >> $HOME/.profile
 
 # Install ruby
-ENV RBENV_VERSION 2.0.0-p481
+ENV RBENV_VERSION 2.1.5
 RUN \
   eval "$(rbenv init -)" && \
   rbenv install $RBENV_VERSION && \
   rbenv global $RBENV_VERSION
+
+# Autoload
+#RUN \
+  #echo 'export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH' >> \
+    #/home/vagrant/.bashrc
+#RUN echo 'eval "$(rbenv init -)"' >> /home/vagrant/.bashrc
+RUN \
+  echo 'export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH' >> \
+    /home/vagrant/.profile
+RUN echo 'eval "$(rbenv init -)"' >> /home/vagrant/.profile
 
 USER root
 

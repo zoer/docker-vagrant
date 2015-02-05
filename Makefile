@@ -8,7 +8,7 @@ all: build
 build: wheezy rbenv
 
 wheezy:
-	docker build -t ${NAME}:wheezy debian/wheezy
+	docker build -t ${NAME}:wheezy --no-cache debian/wheezy
 
 rbenv:
 	docker build -t ${NAME}:rbenv rbenv
